@@ -5,9 +5,9 @@ export function fetchAllDecks() {
 			.then(keys => AsyncStorage.multiGet(keys));
 }
 
-// export function fetchDeck(deckTitle) {
-// 	return AsyncStorage.getItem(deckTitle);
-// }
+export function fetchDeck(deckTitle) {
+	return AsyncStorage.getItem(deckTitle);
+}
 
 // export function createDeck(deckTitle, deck) {
 // 	return AsyncStorage.setItem(deckTitle, JSON.stringify(deck)).then(

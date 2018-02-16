@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { View, Text } from "react-native";
 import { connect } from 'react-redux';
 import { createDeck, fetchAllDecks, fetchDeck } from "../utils/api";
-import { fetchAllDecksActionCreator } from '../actions/decks'
+import { fetchAllDecksActionCreator, fetchDeckActionCreator } from '../actions/decks'
 
 class DeckList extends Component {
 	componentDidMount() {
@@ -10,6 +10,7 @@ class DeckList extends Component {
 		// createDeck("Redux", { title: "redux", questions: ['q3','q4'] });
 		// fetchDeck('React2').then(data => console.log(data));
 		// //this.props.decks;
+		this.props.getDeck('Redux').then((data) => console.log(this.props.deck))
 		this.props.getAllDecks().then(() => console.log(this.props.decks));
 	}
 
@@ -24,13 +25,15 @@ class DeckList extends Component {
 
 function mapStateToProps({ deckReducer }) {
 	return {
-		decks: deckReducer 
+		decks: deckReducer,
+		deck: deckReducer
 	};
 }
 
 function mapDispatchToProps(dispatch) {
 	return {
-		getAllDecks: () => dispatch(fetchAllDecksActionCreator())
+		getAllDecks: () => dispatch(fetchAllDecksActionCreator()),
+		getDeck: (title) => dispatch(fetchDeckActionCreator(title))
 	};
 }
 
