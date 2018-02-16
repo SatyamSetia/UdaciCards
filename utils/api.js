@@ -9,8 +9,6 @@ export function fetchDeck(deckTitle) {
 	return AsyncStorage.getItem(deckTitle);
 }
 
-// export function createDeck(deckTitle, deck) {
-// 	return AsyncStorage.setItem(deckTitle, JSON.stringify(deck)).then(
-// 		console.log("created")
-// 	);
-// }
+export function createDeck(deckTitle) {
+	return AsyncStorage.setItem(deckTitle, JSON.stringify({title: deckTitle, questions: []}));
+}

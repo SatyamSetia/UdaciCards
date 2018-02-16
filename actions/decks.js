@@ -33,3 +33,9 @@ export function fetchDeckActionCreator(title) {
 			dispatch(fetchDeckAction(deck)));
 	};
 }
+
+export function createDeckActionCreator(title) {
+	return function(dispatch) {
+		return createDeck(title).done();
+	};
+}

@@ -2,14 +2,11 @@ import React, { Component } from "react";
 import { View, Text } from "react-native";
 import { connect } from 'react-redux';
 import { createDeck, fetchAllDecks, fetchDeck } from "../utils/api";
-import { fetchAllDecksActionCreator, fetchDeckActionCreator } from '../actions/decks'
+import { fetchAllDecksActionCreator, fetchDeckActionCreator, createDeckActionCreator } from '../actions/decks'
 
 class DeckList extends Component {
 	componentDidMount() {
-		// createDeck("React2", { title: "react2", questions: ['q1','q2'] });
-		// createDeck("Redux", { title: "redux", questions: ['q3','q4'] });
-		// fetchDeck('React2').then(data => console.log(data));
-		// //this.props.decks;
+		this.props.createDeck('JavaScript')
 		this.props.getDeck('Redux').then((data) => console.log(this.props.deck))
 		this.props.getAllDecks().then(() => console.log(this.props.decks));
 	}
@@ -33,7 +30,8 @@ function mapStateToProps({ deckReducer }) {
 function mapDispatchToProps(dispatch) {
 	return {
 		getAllDecks: () => dispatch(fetchAllDecksActionCreator()),
-		getDeck: (title) => dispatch(fetchDeckActionCreator(title))
+		getDeck: (title) => dispatch(fetchDeckActionCreator(title)),
+		createDeck: (title) => dispatch(createDeckActionCreator(title))
 	};
 }
 
