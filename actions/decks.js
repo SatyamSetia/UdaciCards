@@ -13,9 +13,7 @@ export function fetchAllDecksAction(decks) {
 export function fetchAllDecksActionCreator() {
 	return function(dispatch) {
 		return fetchAllDecks().then(decks => {
-			var obj = {};
-			decks.forEach(deck => (obj[deck[0]] = JSON.parse(deck[1])));
-			dispatch(fetchAllDecksAction(obj));
+			dispatch(fetchAllDecksAction(decks));
 		});
 	};
 }
@@ -29,8 +27,9 @@ export function fetchDeckAction(deck) {
 
 export function fetchDeckActionCreator(title) {
 	return function(dispatch) {
-		return fetchDeck(title).then(deck =>
-			dispatch(fetchDeckAction(deck)));
+		return fetchDeck(title).then(deck => {
+			dispatch(fetchDeckAction(deck))
+		});
 	};
 }
 

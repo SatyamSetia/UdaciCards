@@ -1,14 +1,18 @@
 import React, { Component } from "react";
 import { View, Text } from "react-native";
 import { connect } from 'react-redux';
-import { createDeck, fetchAllDecks, fetchDeck } from "../utils/api";
+//import { createDeck, fetchAllDecks, fetchDeck, addQuestion } from "../utils/api";
 import { fetchAllDecksActionCreator, fetchDeckActionCreator, createDeckActionCreator } from '../actions/decks'
 
 class DeckList extends Component {
 	componentDidMount() {
 		this.props.createDeck('JavaScript')
-		this.props.getDeck('Redux').then((data) => console.log(this.props.deck))
-		this.props.getAllDecks().then(() => console.log(this.props.decks));
+		//createDeck('HTML').then(() => addQuestion('HTML',{question: 'q1', answer: 'a1'}));
+		//addQuestion('JavaScript',{question: 'q1', answer: 'a1'});
+		this.props.getDeck('NewRedux').then(() => console.log(this.props.deck))
+		//createDeck('NewRedux');
+		this.props.getAllDecks().then((decks) => console.log(this.props.decks))
+		//fetchAllDecks();
 	}
 
 	render() {
