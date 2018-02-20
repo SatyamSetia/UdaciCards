@@ -1,18 +1,23 @@
 import React, { Component } from "react";
 import { View, Text } from "react-native";
-import { connect } from 'react-redux';
-//import { createDeck, fetchAllDecks, fetchDeck, addQuestion } from "../utils/api";
-import { fetchAllDecksActionCreator, fetchDeckActionCreator, createDeckActionCreator } from '../actions/decks'
+import { connect } from "react-redux";
+import { addQuestionActionCreator } from "../actions/questions";
+import {
+	fetchAllDecksActionCreator,
+	fetchDeckActionCreator,
+	createDeckActionCreator
+} from "../actions/decks";
 
 class DeckList extends Component {
 	componentDidMount() {
-		this.props.createDeck('JavaScript')
-		//createDeck('HTML').then(() => addQuestion('HTML',{question: 'q1', answer: 'a1'}));
-		//addQuestion('JavaScript',{question: 'q1', answer: 'a1'});
-		this.props.getDeck('NewRedux').then(() => console.log(this.props.deck))
-		//createDeck('NewRedux');
-		this.props.getAllDecks().then((decks) => console.log(this.props.decks))
-		//fetchAllDecks();
+		//this.props.createDeck('Javascript')
+		//this.props.addQuestion("Javascript", { question: "q4", answer: "a4" });
+		this.props
+			.getDeck("Javascript")
+			.then(() => console.log(this.props.deck));
+		this.props
+			.getAllDecks()
+			.then(decks => console.log("cdm ", this.props.decks));
 	}
 
 	render() {
@@ -34,8 +39,10 @@ function mapStateToProps({ deckReducer }) {
 function mapDispatchToProps(dispatch) {
 	return {
 		getAllDecks: () => dispatch(fetchAllDecksActionCreator()),
-		getDeck: (title) => dispatch(fetchDeckActionCreator(title)),
-		createDeck: (title) => dispatch(createDeckActionCreator(title))
+		getDeck: title => dispatch(fetchDeckActionCreator(title)),
+		createDeck: title => dispatch(createDeckActionCreator(title)),
+		addQuestion: (title, queAns) =>
+			dispatch(addQuestionActionCreator(title, queAns))
 	};
 }
 

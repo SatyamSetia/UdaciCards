@@ -1,32 +1,34 @@
 import { AsyncStorage } from "react-native";
 
-const STORAGE_KEY_DECKS = "@udacicards:decks";
+const STORAGE_KEY = "@udacicards:decks";
 
-export function fetchAllDecks() {
-	return AsyncStorage.getItem(STORAGE_KEY_DECKS).then(decks =>
-		JSON.parse(decks)
-	);
+export async function fetchAllDecks() {
+	//AsyncStorage.clear();
+	let data = await AsyncStorage.getItem(STORAGE_KEY);
+	let decks = JSON.parse(data);
+	return decks || null;
 }
 
-export function fetchDeck(deckTitle) {
-	return AsyncStorage.getItem(STORAGE_KEY_DECKS).then(
-		decks => JSON.parse(decks)[deckTitle] || null
-	);
+export async function fetchDeck(deckTitle) {
+	const decks = await fetchAllDecks();
+	return decks[deckTitle] || null;
 }
 
-export function createDeck(deckTitle) {
+export async function createDeck(deckTitle) {
 	const deck = {
 		[deckTitle]: {
 			title: deckTitle,
 			questions: []
 		}
 	};
-	return AsyncStorage.mergeItem(STORAGE_KEY_DECKS, JSON.stringify(deck));
+	return await AsyncStorage.mergeItem(STORAGE_KEY, JSON.stringify(deck));
 }
 
-// export function addQuestion(deckTitle, queAns) {
-
-// 	return AsyncStorage.getItem(deckTitle).then(deck => {
-// 		console.log((JSON.parse(deck))['questions'].push(queAns))
-// 	})
-// }
+export async function addQuestion(deckTitle, queAns) {
+	console.log(deckTitle," ",queAns);
+	let decks =  await fetchAllDecks();
+	console.log("before push ",decks)
+	decks[deckTitle].questions.push(queAns)
+	console.log("after push ", decks) 
+	return await AsyncStorage.mergeItem(STORAGE_KEY, JSON.stringify(decks));
+}
