@@ -3,7 +3,8 @@ import { TabNavigator } from 'react-navigation';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import ReduxThunk from 'redux-thunk';
-import { StyleSheet, Text, View, Platform } from 'react-native';
+import { Constants } from 'expo';
+import { StyleSheet, Text, View, Platform, StatusBar } from 'react-native';
 import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons'
 import { white, light_sea_green } from './utils/colors';
 
@@ -46,6 +47,14 @@ const Tabs = TabNavigator({
   }
 })
 
+function CustomStatusBar ({backgroundColor, ...props}) {
+  return (
+    <View style={{ backgroundColor, height: Constants.statusBarHeight }}>
+      <StatusBar translucent backgroundColor={backgroundColor} {...props} />
+    </View>
+  )
+}
+
 export default class App extends React.Component {
   
   render() {
@@ -53,6 +62,7 @@ export default class App extends React.Component {
     return (
       <Provider store={store}>
         <View style={{flex: 1}}>
+          <CustomStatusBar backgroundColor={light_sea_green} barStyle="light-content"/>
           <Tabs/>
         </View>
       </Provider>
