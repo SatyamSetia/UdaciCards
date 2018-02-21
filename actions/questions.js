@@ -3,6 +3,6 @@ import { fetchAlldecksAction } from './decks'
 
 export function addQuestionActionCreator(deckTitle, queAns) {
 	return function(dispatch) {
-		return addQuestion(deckTitle, queAns).done();
+		return addQuestion(deckTitle, queAns);
 	}
 }

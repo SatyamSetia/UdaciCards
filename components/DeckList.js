@@ -11,10 +11,10 @@ import {
 class DeckList extends Component {
 	componentDidMount() {
 		//this.props.createDeck('Javascript')
-		//this.props.addQuestion("Javascript", { question: "q4", answer: "a4" });
-		this.props
-			.getDeck("Javascript")
-			.then(() => console.log(this.props.deck));
+		//this.props.addQuestion("Javascript", { question: "q5", answer: "a5" });
+		// this.props
+		// 	.getDeck("Javascript")
+		// 	.then(() => console.log(this.props.deck));
 		this.props
 			.getAllDecks()
 			.then(decks => console.log("cdm ", this.props.decks));
