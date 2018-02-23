@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "expo": "^25.0.0",
+    "lodash": "^4.17.5",
     "react": "16.2.0",
     "react-native": "0.52.0",
     "react-navigation": "^1.1.2",

@@ -7,23 +7,31 @@ import {
 	fetchDeckActionCreator,
 	createDeckActionCreator
 } from "../actions/decks";
+import DeckListItem from "./DeckListItem";
+import { white_smoke } from '../utils/colors';
 
 class DeckList extends Component {
+	state = {
+		decks: {}
+	}
 	componentDidMount() {
-		//this.props.createDeck('Javascript')
+		//this.props.createDeck("React");
 		//this.props.addQuestion("Javascript", { question: "q5", answer: "a5" });
 		// this.props
 		// 	.getDeck("Javascript")
 		// 	.then(() => console.log(this.props.deck));
 		this.props
 			.getAllDecks()
-			.then(decks => console.log("cdm ", this.props.decks));
+			.then(decks => this.setState({ decks: this.props.decks}));
 	}
 
 	render() {
+		const { decks } = this.state;
 		return (
-			<View>
-				<Text>Deck List</Text>
+			<View style={{ backgroundColor: white_smoke, height: '100%'}}>
+				{Object.keys(decks).map(deckTitle => (
+					<DeckListItem key={deckTitle} title={deckTitle} />
+				))}
 			</View>
 		);
 	}

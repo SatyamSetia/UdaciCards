@@ -11,7 +11,7 @@ export async function fetchAllDecks() {
 
 export async function fetchDeck(deckTitle) {
 	const decks = await fetchAllDecks();
-	return decks[deckTitle] || null;
+	return decks[deckTitle] || {};
 }
 
 export async function createDeck(deckTitle) {
