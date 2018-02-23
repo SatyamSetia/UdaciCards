@@ -48,7 +48,6 @@ function mapDispatchToProps(dispatch) {
 	return {
 		getAllDecks: () => dispatch(fetchAllDecksActionCreator()),
 		getDeck: title => dispatch(fetchDeckActionCreator(title)),
-		createDeck: title => dispatch(createDeckActionCreator(title)),
 		addQuestion: (title, queAns) =>
 			dispatch(addQuestionActionCreator(title, queAns))
 	};
