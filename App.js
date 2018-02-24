@@ -1,5 +1,5 @@
 import React from 'react';
-import { TabNavigator } from 'react-navigation';
+import { TabNavigator, StackNavigator } from 'react-navigation';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import ReduxThunk from 'redux-thunk';
@@ -11,6 +11,7 @@ import { white, light_sea_green } from './utils/colors';
 import reducer from './reducers/index';
 import DeckList from './components/DeckList';
 import AddNewDeck from './components/AddNewDeck';
+import DeckDetail  from './components/DeckDetail';
 
 const Tabs = TabNavigator({
   Decks: {
@@ -47,6 +48,21 @@ const Tabs = TabNavigator({
   }
 })
 
+const MainNavigator = StackNavigator({
+  Home: {
+    screen: Tabs
+  },
+  DeckDetail: {
+    screen: DeckDetail,
+    navigationOptions: {
+      headerTintColor: white,
+      headerStyle: {
+        backgroundColor: light_sea_green
+      }
+    }
+  }
+})
+
 function CustomStatusBar ({backgroundColor, ...props}) {
   return (
     <View style={{ backgroundColor, height: Constants.statusBarHeight }}>
@@ -63,7 +79,7 @@ export default class App extends React.Component {
       <Provider store={store}>
         <View style={{flex: 1}}>
           <CustomStatusBar backgroundColor={light_sea_green} barStyle="light-content"/>
-          <Tabs/>
+          <MainNavigator/>
         </View>
       </Provider>
     );
