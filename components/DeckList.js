@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { View, Text, TouchableOpacity } from "react-native";
+import _ from "lodash";
+import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from "react-native";
 import { connect } from "react-redux";
 import { addQuestionActionCreator } from "../actions/questions";
 import {
@@ -8,12 +9,13 @@ import {
 	createDeckActionCreator
 } from "../actions/decks";
 import DeckListItem from "./DeckListItem";
-import { white_smoke } from "../utils/colors";
+import { white_smoke, white } from "../utils/colors";
 
 class DeckList extends Component {
 	state = {
 		decks: {}
 	};
+
 	componentDidMount() {
 		//this.props.createDeck("React");
 		//this.props.addQuestion("Javascript", { question: "q5", answer: "a5" });
@@ -27,8 +29,15 @@ class DeckList extends Component {
 
 	render() {
 		const { decks } = this.state;
+		if (_.isEmpty(decks)) {
+			return (
+				<View style={styles.container}>
+					<Text>No deck to show.</Text>
+				</View>
+			);
+		}
 		return (
-			<View style={{ backgroundColor: white_smoke, height: "100%" }}>
+			<ScrollView style={styles.list}>
 				{Object.keys(decks).map(deckTitle => (
 					<TouchableOpacity
 						key={deckTitle}
@@ -38,10 +47,23 @@ class DeckList extends Component {
 						<DeckListItem title={deckTitle} />
 					</TouchableOpacity>
 				))}
-			</View>
+			</ScrollView>
 		);
 	}
 }
+
+const styles = StyleSheet.create({
+	container: {
+		flex: 1,
+		backgroundColor: white_smoke,
+		alignItems: "center",
+		justifyContent: "center"
+	},
+	list: {
+		backgroundColor: white_smoke,
+		height: '100%',
+	}
+});
 
 function mapStateToProps({ deckReducer }) {
 	return {
