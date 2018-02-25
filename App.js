@@ -6,7 +6,7 @@ import ReduxThunk from 'redux-thunk';
 import { Constants } from 'expo';
 import { StyleSheet, Text, View, Platform, StatusBar } from 'react-native';
 import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons'
-import { white, light_sea_green } from './utils/colors';
+import { white, dark_pink } from './utils/colors';
 
 import reducer from './reducers/index';
 import DeckList from './components/DeckList';
@@ -33,10 +33,10 @@ const Tabs = TabNavigator({
     header: null
   },
   tabBarOptions: {
-    activeTintColor: Platform.OS === 'ios' ? light_sea_green : white,
+    activeTintColor: Platform.OS === 'ios' ? dark_pink : white,
     style: {
       height: 56,
-      backgroundColor: Platform.OS === 'ios' ? white : light_sea_green,
+      backgroundColor: Platform.OS === 'ios' ? white : dark_pink,
       shadowColor: 'rgba(0, 0, 0, 0.24)',
       shadowOffset: {
         width: 0,
@@ -57,7 +57,7 @@ const MainNavigator = StackNavigator({
     navigationOptions: {
       headerTintColor: white,
       headerStyle: {
-        backgroundColor: light_sea_green
+        backgroundColor: dark_pink
       }
     }
   }
@@ -78,7 +78,7 @@ export default class App extends React.Component {
     return (
       <Provider store={store}>
         <View style={{flex: 1}}>
-          <CustomStatusBar backgroundColor={light_sea_green} barStyle="light-content"/>
+          <CustomStatusBar backgroundColor={dark_pink} barStyle="light-content"/>
           <MainNavigator/>
         </View>
       </Provider>

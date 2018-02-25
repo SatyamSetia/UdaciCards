@@ -1,6 +1,12 @@
 import React, { Component } from "react";
 import _ from "lodash";
-import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from "react-native";
+import {
+	View,
+	Text,
+	TouchableOpacity,
+	StyleSheet,
+	ScrollView
+} from "react-native";
 import { connect } from "react-redux";
 import { addQuestionActionCreator } from "../actions/questions";
 import {
@@ -42,7 +48,9 @@ class DeckList extends Component {
 					<TouchableOpacity
 						key={deckTitle}
 						onPress={() =>
-							this.props.navigation.navigate("DeckDetail")}
+							this.props.navigation.navigate("DeckDetail", {
+								entryId: deckTitle
+							})}
 					>
 						<DeckListItem title={deckTitle} />
 					</TouchableOpacity>
@@ -61,7 +69,7 @@ const styles = StyleSheet.create({
 	},
 	list: {
 		backgroundColor: white_smoke,
-		height: '100%',
+		height: "100%"
 	}
 });
 
