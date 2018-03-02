@@ -34,7 +34,9 @@ class DeckDetail extends Component {
 	}
 
 	onAddCard = () => {
-
+		this.props.navigation.navigate("AddCard",{
+			entryId: this.props.deckTitle
+		});
 	}
 
 	render() {

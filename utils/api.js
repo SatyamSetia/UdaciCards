@@ -25,12 +25,9 @@ export async function createDeck(deckTitle) {
 }
 
 export async function addQuestion(deckTitle, queAns) {
-	console.log(deckTitle," ",queAns);
 	let decks =  await fetchAllDecks();
-	console.log("before push ",decks)
 	if(decks[deckTitle]){
 		decks[deckTitle].questions.push(queAns)
-		console.log("after push ", decks) 
 		return await AsyncStorage.mergeItem(STORAGE_KEY, JSON.stringify(decks));	
 	} else {
 		console.log("error");

@@ -8,7 +8,6 @@ import {
 	ScrollView
 } from "react-native";
 import { connect } from "react-redux";
-import { addQuestionActionCreator } from "../actions/questions";
 import {
 	fetchAllDecksActionCreator,
 	fetchDeckActionCreator,
@@ -83,9 +82,7 @@ function mapStateToProps({ deckReducer }) {
 function mapDispatchToProps(dispatch) {
 	return {
 		getAllDecks: () => dispatch(fetchAllDecksActionCreator()),
-		getDeck: title => dispatch(fetchDeckActionCreator(title)),
-		addQuestion: (title, queAns) =>
-			dispatch(addQuestionActionCreator(title, queAns))
+		getDeck: title => dispatch(fetchDeckActionCreator(title))
 	};
 }
 

@@ -12,6 +12,7 @@ import reducer from './reducers/index';
 import DeckList from './components/DeckList';
 import AddNewDeck from './components/AddNewDeck';
 import DeckDetail  from './components/DeckDetail';
+import AddCard from './components/AddCard';
 
 const Tabs = TabNavigator({
   Decks: {
@@ -55,6 +56,16 @@ const MainNavigator = StackNavigator({
   DeckDetail: {
     screen: DeckDetail,
     navigationOptions: {
+      headerTintColor: white,
+      headerStyle: {
+        backgroundColor: dark_pink
+      }
+    }
+  },
+  AddCard: {
+    screen: AddCard,
+    navigationOptions: {
+      title: 'Add Card',
       headerTintColor: white,
       headerStyle: {
         backgroundColor: dark_pink
