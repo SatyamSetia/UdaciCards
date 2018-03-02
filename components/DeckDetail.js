@@ -1,9 +1,15 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import _ from "lodash";
-import { View, Text, StyleSheet, ActivityIndicator } from "react-native";
+import {
+	View,
+	Text,
+	StyleSheet,
+	ActivityIndicator,
+	TouchableOpacity
+} from "react-native";
 import { fetchDeckActionCreator } from "../actions/decks";
-import { white_smoke, dark_pink } from "../utils/colors";
+import { white_smoke, dark_pink, white } from "../utils/colors";
 
 class DeckDetail extends Component {
 	static navigationOptions = ({ navigation }) => {
@@ -23,6 +29,14 @@ class DeckDetail extends Component {
 			.then(() => this.setState({ deck: this.props.deck }));
 	}
 
+	onQuizStart = () => {
+
+	}
+
+	onAddCard = () => {
+
+	}
+
 	render() {
 		const { deck } = this.state;
 		if (_.isEmpty(deck)) {
@@ -35,7 +49,28 @@ class DeckDetail extends Component {
 
 		return (
 			<View style={styles.container}>
-				<View style={styles.card} />
+				<View style={styles.card}>
+					<Text style={styles.title}>{deck.title}</Text>
+					<Text style={styles.details}>
+						{deck.questions.length} cards
+					</Text>
+
+					<TouchableOpacity
+						style={styles.button}
+						onPress={this.onQuizStart}
+					>
+						<Text style={{ color: white, fontSize: 18 }}>
+							Start Quiz
+						</Text>
+					</TouchableOpacity>
+				</View>
+				<TouchableOpacity
+					onPress={this.onAddCard}
+				>
+					<Text style={{ color:dark_pink, fontSize: 18 }}>
+							Add Card
+						</Text>
+				</TouchableOpacity>
 			</View>
 		);
 	}
@@ -46,10 +81,33 @@ const styles = StyleSheet.create({
 		flex: 1,
 		backgroundColor: white_smoke,
 		alignItems: "center",
-		justifyContent: "center"
+		justifyContent: "space-around"
 	},
 	card: {
-		flex: 1
+		width: 280,
+		height: 300,
+		backgroundColor: white,
+		alignItems: "center",
+		borderRadius: 12
+	},
+	title: {
+		fontSize: 28,
+		margin: 30
+	},
+	details: {
+		fontSize: 20,
+		opacity: 0.5,
+		margin: 30
+	},
+	button: {
+		backgroundColor: dark_pink,
+		width: "100%",
+		height: 50,
+		marginTop: 73,
+		borderBottomLeftRadius: 12,
+        borderBottomRightRadius: 12,
+		alignItems: "center",
+		justifyContent: "center"
 	}
 });
 
