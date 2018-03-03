@@ -26,11 +26,13 @@ class DeckListItem extends Component {
 			);
 		}
 
+		const size = deck.questions.length;
+
 		return (
 			<View style={styles.card}>
 				<Text style={styles.title}>{deck.title}</Text>
 				<Text style={styles.details}>
-					{deck.questions.length} cards
+					{size === 1? `${size} card`: `${size} cards`}
 				</Text>
 			</View>
 		);

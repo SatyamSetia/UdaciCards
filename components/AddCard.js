@@ -24,6 +24,10 @@ class AddCard extends Component {
 			question: this.state.question,
 			answer: this.state.answer
 		});
+		this.setState({
+			question: '',
+			answer: ''
+		})
 	};
 
 	render() {

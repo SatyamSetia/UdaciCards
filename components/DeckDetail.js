@@ -29,8 +29,10 @@ class DeckDetail extends Component {
 			.then(() => this.setState({ deck: this.props.deck }));
 	}
 
-	onQuizStart = () => {
-
+	onQuizStart = (disabled) => {
+		this.props.navigation.navigate("QuizView",{
+			entryId: this.props.deckTitle
+		});
 	}
 
 	onAddCard = () => {
@@ -49,16 +51,19 @@ class DeckDetail extends Component {
 			);
 		}
 
+		const size = deck.questions.length;
+
 		return (
 			<View style={styles.container}>
 				<View style={styles.card}>
 					<Text style={styles.title}>{deck.title}</Text>
 					<Text style={styles.details}>
-						{deck.questions.length} cards
+						{size === 1? `${size} card`: `${size} cards`}
 					</Text>
 
 					<TouchableOpacity
 						style={styles.button}
+						disabled={size===0?true:false}
 						onPress={this.onQuizStart}
 					>
 						<Text style={{ color: white, fontSize: 18 }}>
