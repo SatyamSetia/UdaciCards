@@ -9,7 +9,7 @@ import {
 	TouchableOpacity,
 	ProgressBarAndroid
 } from "react-native";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { MaterialCommunityIcons, Entypo } from "@expo/vector-icons";
 import { fetchDeckActionCreator } from "../actions/decks";
 import {
 	white_smoke,
@@ -20,6 +20,7 @@ import {
 	dark_red,
 	dark_green
 } from "../utils/colors";
+import ProgressCircle from "react-native-progress-circle";
 
 class QuizView extends Component {
 	state = {
@@ -38,18 +39,18 @@ class QuizView extends Component {
 
 	onIncorrectPress = () => {
 		this.setState({
-			currentIndex: this.state.currentIndex+1,
+			currentIndex: this.state.currentIndex + 1,
 			side: "question"
-		})
-	}
+		});
+	};
 
 	onCorrectPress = () => {
 		this.setState({
-			currentIndex: this.state.currentIndex+1,
+			currentIndex: this.state.currentIndex + 1,
 			side: "question",
-			score: this.state.score++
-		})
-	}
+			score: this.state.score + 1
+		});
+	};
 
 	renderProgressBar() {
 		const { questions, currentIndex } = this.state;
@@ -68,17 +69,61 @@ class QuizView extends Component {
 		);
 	}
 
+	onRestart = () => {
+		this.setState({
+			currentIndex: 0,
+			side: 'question',
+			score: 0
+		})
+	}
+
 	render() {
-		const { questions, side, currentIndex } = this.state;
+		const { questions, side, currentIndex, score } = this.state;
 		if (questions.length === 0) {
 			return (
 				<View style={styles.container}>
 					<ActivityIndicator size="large" color={dark_pink} />
 				</View>
 			);
-		} else if (currentIndex === questions.length){
+		} else if (currentIndex === questions.length) {
+			const percentage = score / questions.length * 100;
 			return (
-				<View style={styles.container}></View>
+				<View style={styles.container}>
+					<View style={styles.card}>
+						<View style={styles.cardContent}>
+							<ProgressCircle
+								percent={percentage}
+								radius={70}
+								borderWidth={4}
+								color={dark_pink}
+								shadowColor={white_smoke}
+								bgColor={white}
+							>
+								{percentage >= 50 ? (
+									<Entypo
+										name="thumbs-up"
+										size={50}
+										color={green}
+									/>
+								) : (
+									<Entypo
+										name="thumbs-down"
+										size={50}
+										color={red}
+									/>
+								)}
+							</ProgressCircle>
+						</View>
+						<Text style={styles.score}>
+							Your Score: {percentage.toString().substring(0, 5)}%
+						</Text>
+					</View>
+					<TouchableOpacity onPress={this.onRestart}>
+						<Text style={{ color: dark_pink, fontSize: 18 }}>
+							Restart
+						</Text>
+					</TouchableOpacity>
+				</View>
 			);
 		} else if (side === "question") {
 			const que = questions[currentIndex];
@@ -129,7 +174,10 @@ class QuizView extends Component {
 							</Text>
 						</View>
 						<View style={styles.cardButtons}>
-							<TouchableOpacity style={styles.incorrect} onPress={this.onIncorrectPress}>
+							<TouchableOpacity
+								style={styles.incorrect}
+								onPress={this.onIncorrectPress}
+							>
 								<Text
 									style={{
 										color: dark_red,
@@ -140,7 +188,10 @@ class QuizView extends Component {
 									Incorrect
 								</Text>
 							</TouchableOpacity>
-							<TouchableOpacity style={styles.correct} onPress={this.onCorrectPress}>
+							<TouchableOpacity
+								style={styles.correct}
+								onPress={this.onCorrectPress}
+							>
 								<Text
 									style={{
 										color: dark_green,
@@ -179,7 +230,8 @@ const styles = StyleSheet.create({
 	cardContent: {
 		width: "100%",
 		height: "70%",
-		justifyContent: "center"
+		justifyContent: "center",
+		alignItems: "center"
 	},
 	cardText: {
 		fontSize: 26,
@@ -227,6 +279,10 @@ const styles = StyleSheet.create({
 	},
 	progressCount: {
 		fontSize: 18
+	},
+	score: {
+		fontSize: 20,
+		margin: 20
 	}
 });
 
