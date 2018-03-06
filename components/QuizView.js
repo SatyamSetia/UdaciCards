@@ -27,7 +27,8 @@ class QuizView extends Component {
 		questions: [],
 		currentIndex: 0,
 		queSide: true,
-		score: 0
+		score: 0,
+		bounceValue: new Animated.Value(1)
 	};
 
 	componentDidMount() {
@@ -54,8 +55,16 @@ class QuizView extends Component {
 		}).start();
 	}
 
+	bounceAnimation() {
+		const { bounceValue } = this.state;
+		Animated.sequence([
+			Animated.timing(bounceValue, { duration: 300, toValue: 1.5 }),
+			Animated.spring(bounceValue, { toValue: 1, friction: 4 })
+		]).start();
+	}
+
 	onIncorrectPress = () => {
-		this.springAnimation()
+		this.springAnimation();
 		this.setState({
 			currentIndex: this.state.currentIndex + 1,
 			queSide: true
@@ -63,7 +72,7 @@ class QuizView extends Component {
 	};
 
 	onCorrectPress = () => {
-		this.springAnimation()
+		this.springAnimation();
 		this.setState({
 			currentIndex: this.state.currentIndex + 1,
 			queSide: true,
@@ -72,7 +81,7 @@ class QuizView extends Component {
 	};
 
 	flipCard = () => {
-		this.springAnimation()
+		this.springAnimation();
 		this.setState({ queSide: !this.state.queSide });
 	};
 
@@ -116,8 +125,9 @@ class QuizView extends Component {
 	}
 
 	renderScoreCard() {
-		const { score, questions } = this.state;
+		const { score, questions, bounceValue } = this.state;
 		const percentage = score / questions.length * 100;
+		this.bounceAnimation();
 		return (
 			<View style={styles.container}>
 				<View style={styles.card}>
@@ -130,19 +140,25 @@ class QuizView extends Component {
 							shadowColor={white_smoke}
 							bgColor={white}
 						>
-							{percentage >= 50 ? (
-								<Entypo
-									name="thumbs-up"
-									size={50}
-									color={green}
-								/>
-							) : (
-								<Entypo
-									name="thumbs-down"
-									size={50}
-									color={red}
-								/>
-							)}
+							<Animated.View
+								style={{
+									transform: [{ scale: bounceValue }]
+								}}
+							>
+								{percentage >= 50 ? (
+									<Entypo
+										name="thumbs-up"
+										size={50}
+										color={green}
+									/>
+								) : (
+									<Entypo
+										name="thumbs-down"
+										size={50}
+										color={red}
+									/>
+								)}
+							</Animated.View>
 						</ProgressCircle>
 					</View>
 					<Text style={styles.score}>
