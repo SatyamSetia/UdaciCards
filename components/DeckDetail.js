@@ -6,7 +6,8 @@ import {
 	Text,
 	StyleSheet,
 	ActivityIndicator,
-	TouchableOpacity
+	TouchableOpacity,
+	Animated
 } from "react-native";
 import { fetchDeckActionCreator } from "../actions/decks";
 import { white_smoke, dark_pink, white } from "../utils/colors";
@@ -20,13 +21,19 @@ class DeckDetail extends Component {
 	};
 
 	state = {
-		deck: {}
+		deck: {},
+		bounceValue: new Animated.Value(1)
 	};
 
 	componentDidMount() {
 		this.props
 			.getDeck(this.props.deckTitle)
 			.then(() => this.setState({ deck: this.props.deck }));
+		const { bounceValue } = this.state;
+		Animated.sequence([
+			Animated.timing(bounceValue, { duration: 400, toValue: 1.07 }),
+			Animated.spring(bounceValue, { toValue: 1, friction: 2 })
+		]).start();
 	}
 
 	onQuizStart = (disabled) => {
@@ -42,7 +49,7 @@ class DeckDetail extends Component {
 	}
 
 	render() {
-		const { deck } = this.state;
+		const { deck, bounceValue } = this.state;
 		if (_.isEmpty(deck)) {
 			return (
 				<View style={styles.container}>
@@ -55,7 +62,7 @@ class DeckDetail extends Component {
 
 		return (
 			<View style={styles.container}>
-				<View style={styles.card}>
+				<Animated.View style={[styles.card, {transform: [{ scale: bounceValue }]}]}>
 					<Text style={styles.title}>{deck.title}</Text>
 					<Text style={styles.details}>
 						{size === 1? `${size} card`: `${size} cards`}
@@ -70,7 +77,7 @@ class DeckDetail extends Component {
 							Start Quiz
 						</Text>
 					</TouchableOpacity>
-				</View>
+				</Animated.View>
 				<TouchableOpacity
 					onPress={this.onAddCard}
 				>
