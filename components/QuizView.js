@@ -167,7 +167,12 @@ class QuizView extends Component {
 				</View>
 				<TouchableOpacity onPress={this.onRestart}>
 					<Text style={{ color: dark_pink, fontSize: 18 }}>
-						Restart
+						Restart Quiz
+					</Text>
+				</TouchableOpacity>
+				<TouchableOpacity onPress={() => this.props.goBack()}>
+					<Text style={{ color: dark_pink, fontSize: 18 }}>
+						Back to Deck
 					</Text>
 				</TouchableOpacity>
 			</View>
@@ -371,9 +376,10 @@ function mapStateToProps(state, { navigation, deckReducer }) {
 	};
 }
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps(dispatch, { navigation }) {
 	return {
-		getDeck: title => dispatch(fetchDeckActionCreator(title))
+		getDeck: title => dispatch(fetchDeckActionCreator(title)),
+		goBack: () => navigation.goBack()
 	};
 }
 
