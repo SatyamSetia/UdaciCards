@@ -11,6 +11,7 @@ import {
 } from "react-native";
 import { fetchDeckActionCreator } from "../actions/decks";
 import { white_smoke, dark_pink, white } from "../utils/colors";
+import { clearLocalNotification, setLocalNotification } from '../utils/api';
 
 class DeckDetail extends Component {
 	static navigationOptions = ({ navigation }) => {
@@ -37,6 +38,7 @@ class DeckDetail extends Component {
 	}
 
 	onQuizStart = (disabled) => {
+		clearLocalNotification().then(setLocalNotification);
 		this.props.navigation.navigate("QuizView",{
 			entryId: this.props.deckTitle
 		});
