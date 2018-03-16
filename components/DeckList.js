@@ -22,17 +22,13 @@ class DeckList extends Component {
 	};
 
 	componentDidMount() {
-		//this.props.createDeck("React");
-		//this.props.addQuestion("Javascript", { question: "q5", answer: "a5" });
-		// this.props
-		// 	.getDeck("Javascript")
-		// 	.then(() => console.log(this.props.deck));
 		this.props
 			.getAllDecks()
 			.then(decks => this.setState({ decks: this.props.decks }));
 	}
 
 	render() {
+		console.log('render')
 		const { decks } = this.state;
 		if (_.isEmpty(decks)) {
 			return (

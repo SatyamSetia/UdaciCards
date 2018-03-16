@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import _ from "lodash";
 import { connect } from "react-redux";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, ActivityIndicator } from "react-native";
 import { fetchDeckActionCreator } from "../actions/decks";
-import { white } from "../utils/colors";
+import { white, dark_pink } from "../utils/colors";
 
 class DeckListItem extends Component {
 	state = {
@@ -20,8 +20,8 @@ class DeckListItem extends Component {
 		const { deck } = this.state;
 		if (_.isEmpty(deck)) {
 			return (
-				<View>
-					<Text>Loading...</Text>
+				<View style={styles.card}>
+					<ActivityIndicator size="small" color={dark_pink} />
 				</View>
 			);
 		}
