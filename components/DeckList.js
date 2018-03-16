@@ -50,6 +50,7 @@ class DeckList extends Component {
 						<DeckListItem title={deckTitle} />
 					</TouchableOpacity>
 				))}
+				<View style={{height: 10}}></View>
 			</ScrollView>
 		);
 	}

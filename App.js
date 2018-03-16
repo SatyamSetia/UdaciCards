@@ -32,7 +32,15 @@ const Tabs = TabNavigator({
   }
 }, {
   navigationOptions: {
-    header: null
+    title: 'UdaciCards',
+    headerStyle: {
+      backgroundColor: dark_pink,
+      elevation: 0,
+      height: 36
+    },
+    headerTitleStyle: { 
+      color: white
+    }
   },
   tabBarOptions: {
     activeTintColor: Platform.OS === 'ios' ? dark_pink : white,
