@@ -1,35 +1,21 @@
 import React, { Component } from "react";
-import _ from "lodash";
-import { connect } from "react-redux";
+//import _ from "lodash";
+//import { connect } from "react-redux";
 import { View, Text, StyleSheet, ActivityIndicator } from "react-native";
-import { fetchDeckActionCreator } from "../actions/decks";
+//import { fetchDeckActionCreator } from "../actions/decks";
 import { white, dark_pink } from "../utils/colors";
 
 class DeckListItem extends Component {
-	state = {
-		deck: {}
-	};
-
-	componentDidMount() {
-		this._fetchData()
-		//this.props.navigation.addListener('willFocus', this._fetchData);
-	}
-
-	_fetchData = () => {
-		this.props
-			.getDeck(this.props.title)
-			.then(() => this.setState({ deck: this.props.deck }));
-	}
 
 	render() {
-		const { deck } = this.state;
-		if (_.isEmpty(deck)) {
-			return (
-				<View style={styles.card}>
-					<ActivityIndicator size="small" color={dark_pink} />
-				</View>
-			);
-		}
+		const { deck } = this.props;
+		// if (_.isEmpty(deck)) {
+		// 	return (
+		// 		<View style={styles.card}>
+		// 			<ActivityIndicator size="small" color={dark_pink} />
+		// 		</View>
+		// 	);
+		// }
 
 		const size = deck.questions.length;
 
@@ -63,16 +49,4 @@ const styles = StyleSheet.create({
 	}
 });
 
-function mapStateToProps({ deckReducer }) {
-	return {
-		deck: deckReducer
-	};
-}
-
-function mapDispatchToProps(dispatch) {
-	return {
-		getDeck: title => dispatch(fetchDeckActionCreator(title))
-	};
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(DeckListItem);
+export default DeckListItem;

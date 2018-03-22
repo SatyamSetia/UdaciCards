@@ -9,7 +9,6 @@ import {
 	TouchableOpacity,
 	Animated
 } from "react-native";
-//import { MaterialIcons } from '@expo/vector-icons'
 import { fetchDeckActionCreator } from "../actions/decks";
 import { white_smoke, dark_pink, white } from "../utils/colors";
 import { clearLocalNotification, setLocalNotification } from '../utils/api';
@@ -28,14 +27,18 @@ class DeckDetail extends Component {
 	};
 
 	componentDidMount() {
-		this.props
-			.getDeck(this.props.deckTitle)
-			.then(() => this.setState({ deck: this.props.deck }));
+		this.props.navigation.addListener('willFocus', this._fetchData);
 		const { bounceValue } = this.state;
 		Animated.sequence([
 			Animated.timing(bounceValue, { duration: 400, toValue: 1.07 }),
 			Animated.spring(bounceValue, { toValue: 1, friction: 2 })
 		]).start();
+	}
+
+	_fetchData = () => {
+		this.props
+			.getDeck(this.props.deckTitle)
+			.then(() => this.setState({ deck: this.props.deck }));
 	}
 
 	onQuizStart = (disabled) => {

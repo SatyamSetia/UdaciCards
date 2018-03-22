@@ -25,12 +25,6 @@ class DeckList extends Component {
 		this.props.navigation.addListener('willFocus', this._fetchData);
 	}
 
-	// componentWillReceiveProps(nextProps) {
-	// 	if(nextProps.decks!==this.props.decks){
-	// 		console.log(this.props)
-	// 	}
-	// }
-
 	_fetchData = () => {
 		this.props
 			.getAllDecks()
@@ -53,11 +47,10 @@ class DeckList extends Component {
 						key={deckTitle}
 						onPress={() =>
 							this.props.navigation.navigate("DeckDetail", {
-								//updateData: this.updateData,
 								entryId: deckTitle
 							})}
 					>
-						<DeckListItem title={deckTitle} />
+						<DeckListItem deck={decks[deckTitle]} />
 					</TouchableOpacity>
 				))}
 				<View style={{height: 10}}></View>
