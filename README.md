@@ -2,7 +2,7 @@
 
 This project is completed as a part of React Native course in React Nanodegree from Udacity. It is a mobile flashcard app (android/ios) in which user can create decks and add cards to them. These cards are available in the form of quiz. This project has native features like notifications and animation.
 
-[Download link](https://exp-shell-app-assets.s3-us-west-1.amazonaws.com/android%2F%40satyamsetia%2Fudacicards-bb399957-295c-11e8-a98d-0a580a780915-signed.apk) of for .apk file of this project.
+[Download link](https://exp-shell-app-assets.s3-us-west-1.amazonaws.com/android%2F%40satyamsetia%2Fudacicards-1547e53e-2e03-11e8-a98d-0a580a780915-signed.apk) of for .apk file of this project.
 
 ## TL;DR
 
