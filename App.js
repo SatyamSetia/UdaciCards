@@ -14,6 +14,7 @@ import AddNewDeck from './components/AddNewDeck';
 import DeckDetail  from './components/DeckDetail';
 import AddCard from './components/AddCard';
 import QuizView from './components/QuizView';
+import SplashScreen from './components/SplashScreen';
 
 const Tabs = TabNavigator({
   Decks: {
@@ -60,6 +61,12 @@ const Tabs = TabNavigator({
 })
 
 const MainNavigator = StackNavigator({
+  SplashScreen: {
+    screen: SplashScreen,
+    navigationOptions: {
+      header: null
+    }
+  },
   Home: {
     screen: Tabs
   },
