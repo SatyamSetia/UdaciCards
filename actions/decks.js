@@ -13,7 +13,6 @@ export function fetchAllDecksAction(decks) {
 export function fetchAllDecksActionCreator() {
 	return function(dispatch) {
 		return fetchAllDecks().then(decks => {
-			//console.log(decks);
 			dispatch(fetchAllDecksAction(decks));
 		});
 	};

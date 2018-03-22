@@ -22,13 +22,22 @@ class DeckList extends Component {
 	};
 
 	componentDidMount() {
+		this.props.navigation.addListener('willFocus', this._fetchData);
+	}
+
+	// componentWillReceiveProps(nextProps) {
+	// 	if(nextProps.decks!==this.props.decks){
+	// 		console.log(this.props)
+	// 	}
+	// }
+
+	_fetchData = () => {
 		this.props
 			.getAllDecks()
-			.then(decks => this.setState({ decks: this.props.decks }));
+			.then(() => this.setState({ decks: this.props.decks }));
 	}
 
 	render() {
-		console.log('render')
 		const { decks } = this.state;
 		if (_.isEmpty(decks)) {
 			return (
@@ -44,6 +53,7 @@ class DeckList extends Component {
 						key={deckTitle}
 						onPress={() =>
 							this.props.navigation.navigate("DeckDetail", {
+								//updateData: this.updateData,
 								entryId: deckTitle
 							})}
 					>

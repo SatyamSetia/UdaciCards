@@ -11,6 +11,11 @@ class DeckListItem extends Component {
 	};
 
 	componentDidMount() {
+		this._fetchData()
+		//this.props.navigation.addListener('willFocus', this._fetchData);
+	}
+
+	_fetchData = () => {
 		this.props
 			.getDeck(this.props.title)
 			.then(() => this.setState({ deck: this.props.deck }));

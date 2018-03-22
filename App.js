@@ -42,6 +42,7 @@ const Tabs = TabNavigator({
       color: white
     }
   },
+  swipeEnabled: false,
   tabBarOptions: {
     activeTintColor: Platform.OS === 'ios' ? dark_pink : white,
     style: {
