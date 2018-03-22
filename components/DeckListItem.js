@@ -1,21 +1,11 @@
 import React, { Component } from "react";
-//import _ from "lodash";
-//import { connect } from "react-redux";
 import { View, Text, StyleSheet, ActivityIndicator } from "react-native";
-//import { fetchDeckActionCreator } from "../actions/decks";
 import { white, dark_pink } from "../utils/colors";
 
 class DeckListItem extends Component {
 
 	render() {
 		const { deck } = this.props;
-		// if (_.isEmpty(deck)) {
-		// 	return (
-		// 		<View style={styles.card}>
-		// 			<ActivityIndicator size="small" color={dark_pink} />
-		// 		</View>
-		// 	);
-		// }
 
 		const size = deck.questions.length;
 

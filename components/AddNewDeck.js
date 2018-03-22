@@ -28,12 +28,6 @@ class AddNewDeck extends Component {
 		})
 	}
 
-	// updateData = () => {
-	// 	this.props
-	// 		.getAllDecks()
-	// 		.then(() => this.setState({ decks: this.props.decks }));
-	// }
-
 	render() {
 		return (
 			<KeyboardAvoidingView behavior="padding" style={styles.container}>
